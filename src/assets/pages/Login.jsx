@@ -1,6 +1,5 @@
 import React from 'react';
-// import BackgroundImage from '../components/BackgroundImage';
-import LoginForm from '../components/LoginForm';
+import LoginForm from '../components/Login/LoginForm';
 
 function Login() {
   return (

@@ -11,11 +11,6 @@ function App() {
       <Router>
         <Routes>
         <Route path="/login" element={<Login />} />
-{/* 
-          <Route path="/" element={<Home />} />
-          <Route path="/movies" element={<Movies />} />
-          <Route path="/tvseries" element={<TvSeries />} />
-          <Route path="/bookmarked" element={<Bookmarked />} /> */}
         </Routes>
       </Router>
   );

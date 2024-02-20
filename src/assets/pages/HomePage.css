@@ -1,0 +1,41 @@
+.header {
+    background-color: #001529;
+    color: white;
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .title {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  .content {
+    padding: 50px 0;
+  }
+  
+  .content-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .image-wrapper {
+    flex: 1;
+    margin-right: 20px;
+  }
+  
+  .image {
+    max-width: 100%;
+  }
+  
+  .text-wrapper {
+    flex: 2;
+  }
+  
+  .footer {
+    text-align: center;
+    background-color: #f0f2f5;
+    padding: 20px;
+  }
+  

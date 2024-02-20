@@ -1,15 +1,13 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import { useState } from 'react';
 import './App.css';
 import Login from './assets/pages/Login.jsx'; 
 import Signup from './assets/pages/Signup.jsx';
 import Dashboard from './assets/pages/Dashboard.jsx'
-// import Home from './assets/pages/HomePage.jsx';
+import Home from './assets/pages/HomePage.jsx';
 
 
 function App() {
-  const [count, setCount] = useState(0);
 
   return (
       <Router>
@@ -17,8 +15,8 @@ function App() {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/dashboard" element={<Dashboard />} />
-
-        {/* <Route path="/" element={<Home />} /> */}
+        
+        <Route path="/" element={<Home />} />
         </Routes>
       </Router>
   );

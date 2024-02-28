@@ -1,5 +1,6 @@
 import React from 'react';
 import { Form, Input, Button, Typography, Select } from 'antd';
+import { Link } from 'react-router-dom';
 
 const { Title } = Typography;
 const { Option } = Select;
@@ -76,6 +77,7 @@ const Signup = () => {
                     </Button>
                 </Form.Item>
             </Form>
+            Already Registered? <Link to="/login">Login</Link>
         </div>
     );
 };

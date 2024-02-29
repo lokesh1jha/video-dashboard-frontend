@@ -1,18 +1,23 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography } from 'antd';
+import { login } from '../api';
 
 const { Title } = Typography;
 
 function Login() {
     const navigate = useNavigate(); // Initialize useHistory hook
 
-    const onFinish = (values) => {
+    const onFinish = async (values) => {
         console.log('Received values:', values);
-        // Handle form submission logic (e.g., send data to server)
-        
-        // Redirect to dashboard
-        navigate('/dashboard');
+        let { email, password } = values;
+        let result = await login({email, password});
+        if (result.token) {
+            localStorage.setItem('Authorization', result.token);
+            navigate('/dashboard');
+        } else {
+            showNotification('error', 'Error', result.message);
+        }
     };
 
     return (

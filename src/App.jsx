@@ -4,7 +4,7 @@ import AuthRoute from './Route/AuthRoute.jsx';
 import NonAuthRoute from './Route/NonAuthRoute.jsx';
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   return (
     <>

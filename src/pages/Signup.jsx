@@ -1,16 +1,29 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Form, Input, Button, Typography, Select } from 'antd';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { register } from '../api';
 
 const { Title } = Typography;
 const { Option } = Select;
+import showNotification from '../components/showNotification';
 
 const Signup = () => {
-    const onFinish = (values) => {
-        console.log('Received values:', values);
-        // Handle form submission logic (e.g., send data to server)
-    };
+    const navigate = useNavigate();
 
+    const onFinish = async (values) => {
+        console.log('Received values:', values);
+    
+        let { username, email, password, user_type } = values;
+        let result = await register({ username, email, password, user_type });
+        if (result.status === 200) {
+            showNotification('success', 'Success', 'User registered successfully');
+            console.log('Navigating to login page');
+            navigate('/login');
+        } else {
+            showNotification('error', 'Error', result.message);
+        }
+    };
+    
     return (
         <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
             <Title level={2}>Sign Up</Title>
@@ -62,12 +75,12 @@ const Signup = () => {
                 </Form.Item>
 
                 <Form.Item
-                    name="registrationType"
+                    name="user_type"
                     rules={[{ required: true, message: 'Please select your registration type!' }]}
                 >
                     <Select placeholder="Select registration type">
                         <Option value="client">Register as a client</Option>
-                        <Option value="serviceProvider">Register as a service provider</Option>
+                        <Option value="service_provider">Register as a service provider</Option>
                     </Select>
                 </Form.Item>
 

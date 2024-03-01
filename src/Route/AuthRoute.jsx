@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes, Link, useLocation, useNavigate } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import { Layout, Menu, Button } from 'antd';
 import {
@@ -15,7 +15,8 @@ import History from '../pages/History';
 const { Sider, Header } = Layout;
 
 function AuthRoute() {
-    const navigate = useNavigate()
+    const navigate = useNavigate();
+    const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
 
     const handleMenuClick = (key) => {
@@ -41,25 +42,21 @@ function AuthRoute() {
                 <Menu
                     theme="dark"
                     mode="inline"
-                    defaultSelectedKeys={['1']}
+                    selectedKeys={[location.pathname]}
                     onClick={({ key }) => handleMenuClick(key)}
                 >
-                    <Menu.Item key="1" icon={<UserOutlined />} >
+                    <Menu.Item key="/dashboard" icon={<UserOutlined />} >
                         <Link to="/dashboard">Dashboard</Link>
                     </Menu.Item>
-                    <Menu.Item key="2" icon={<VideoCameraOutlined />}>
+                    <Menu.Item key="/history" icon={<VideoCameraOutlined />}>
                         <Link to="/history">History</Link>
                     </Menu.Item>
-                    <Menu.Item key="3" icon={<UploadOutlined />}>
+                    <Menu.Item key="/profile" icon={<UploadOutlined />}>
                         <Link to="/profile">Profile</Link>
                     </Menu.Item>
                 </Menu>
             </Sider>
             <Layout className="site-layout">
-                {/* <Header
-                        className="site-layout-background"
-                        style={{ padding: 0 }}
-                    > */}
                 <Button
                     type="text"
                     icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
@@ -70,7 +67,6 @@ function AuthRoute() {
                         height: 64,
                     }}
                 />
-                {/* </Header> */}
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />

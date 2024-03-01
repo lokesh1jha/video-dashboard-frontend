@@ -33,8 +33,7 @@ const Profile = () => {
 
   useEffect(() => {
     form.setFieldsValue(initialData);
-  }, [])
-
+  }, []);
 
   const handleEditReset = () => {
     if (isEditing) {
@@ -44,10 +43,9 @@ const Profile = () => {
       setIsEditing(true);
     }
   };
-  
-  
+
   const handleSave = () => {
-    form.submit(); 
+    form.submit();
     const formData = form.getFieldsValue();
     //api call
     console.log(formData);
@@ -58,54 +56,54 @@ const Profile = () => {
       {...formItemLayout}
       form={form}
       name="profileForm"
-      style={{ maxWidth: 600 }}
+      style={{ maxWidth: 900 }}
       onFinish={values => {
         console.log('Form values:', values); // Handle form submission
       }}
     >
       <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input your name!' }]}>
-        <Input />
+        <Input disabled={!isEditing} />
       </Form.Item>
 
       <Form.Item label="Organization Name" name="organizationName">
-        <Input />
+        <Input disabled={!isEditing} />
       </Form.Item>
 
       <Form.Item label="Email" name="email">
-        <Input readOnly />
+        <Input readOnly disabled />
       </Form.Item>
 
       <Form.Item label="Phone Number" name="phoneNumber">
-        <Input />
+        <Input disabled={!isEditing} />
       </Form.Item>
 
       <Form.Item label="Active Plan" name="activePlan">
-        <Input readOnly />
+        <Input readOnly disabled/>
       </Form.Item>
 
       <Form.Item label="Plan Expiry" name="planExpiry">
-        <Input readOnly />
+        <Input readOnly disabled/>
       </Form.Item>
 
       <Form.Item label="Address">
         <Space size="small">
           <Form.Item name={['address', 'street']} noStyle>
-            <Input placeholder="Street" />
+            <Input placeholder="Street" disabled={!isEditing} />
           </Form.Item>
           <Form.Item name={['address', 'state']} noStyle>
-            <Input placeholder="State" />
+            <Input placeholder="State" disabled={!isEditing} />
           </Form.Item>
           <Form.Item name={['address', 'country']} noStyle>
-            <Input placeholder="Country" />
+            <Input placeholder="Country" disabled={!isEditing} />
           </Form.Item>
           <Form.Item name={['address', 'pincode']} noStyle>
-            <Input placeholder="Pincode" />
+            <Input placeholder="Pincode" disabled={!isEditing} />
           </Form.Item>
         </Space>
       </Form.Item>
 
       <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-      <Button type="primary" onClick={handleEditReset}>
+        <Button type="primary" onClick={handleEditReset}>
           {isEditing ? 'Reset' : 'Edit'}
         </Button>
         {isEditing && (

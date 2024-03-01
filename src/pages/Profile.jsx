@@ -1,17 +1,5 @@
-import React from 'react';
-import {
-  Button,
-  Cascader,
-  DatePicker,
-  Form,
-  Input,
-  InputNumber,
-  Mentions,
-  Select,
-  TreeSelect,
-} from 'antd';
-
-const { RangePicker } = DatePicker;
+import React, { useEffect, useState } from 'react';
+import { Button, Form, Input, Space } from 'antd';
 
 const formItemLayout = {
   labelCol: {
@@ -24,82 +12,110 @@ const formItemLayout = {
   },
 };
 
-function Profile() {
-    return (
-        <>
-         <Form {...formItemLayout} variant="filled" style={{ maxWidth: 600 }}>
-    <Form.Item label="Input" name="Input" rules={[{ required: true, message: 'Please input!' }]}>
-      <Input />
-    </Form.Item>
+const initialData = {
+  name: 'John Doe',
+  organizationName: 'ABC Company',
+  email: 'john.doe@example.com',
+  phoneNumber: '1234567890',
+  activePlan: 'Premium',
+  planExpiry: '2024-12-31',
+  address: {
+    street: '123 Main St',
+    state: 'California',
+    country: 'USA',
+    pincode: '12345',
+  },
+};
 
-    <Form.Item
-      label="InputNumber"
-      name="InputNumber"
-      rules={[{ required: true, message: 'Please input!' }]}
+const Profile = () => {
+  const [form] = Form.useForm();
+  const [isEditing, setIsEditing] = useState(false);
+
+  useEffect(() => {
+    form.setFieldsValue(initialData);
+  }, [])
+
+
+  const handleEditReset = () => {
+    if (isEditing) {
+      form.setFieldsValue(initialData);
+      setIsEditing(false);
+    } else {
+      setIsEditing(true);
+    }
+  };
+  
+  
+  const handleSave = () => {
+    form.submit(); 
+    const formData = form.getFieldsValue();
+    //api call
+    console.log(formData);
+  };
+
+  return (
+    <Form
+      {...formItemLayout}
+      form={form}
+      name="profileForm"
+      style={{ maxWidth: 600 }}
+      onFinish={values => {
+        console.log('Form values:', values); // Handle form submission
+      }}
     >
-      <InputNumber style={{ width: '100%' }} />
-    </Form.Item>
+      <Form.Item label="Name" name="name" rules={[{ required: true, message: 'Please input your name!' }]}>
+        <Input />
+      </Form.Item>
 
-    <Form.Item
-      label="TextArea"
-      name="TextArea"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <Input.TextArea />
-    </Form.Item>
+      <Form.Item label="Organization Name" name="organizationName">
+        <Input />
+      </Form.Item>
 
-    <Form.Item
-      label="Mentions"
-      name="Mentions"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <Mentions />
-    </Form.Item>
+      <Form.Item label="Email" name="email">
+        <Input readOnly />
+      </Form.Item>
 
-    <Form.Item label="Select" name="Select" rules={[{ required: true, message: 'Please input!' }]}>
-      <Select />
-    </Form.Item>
+      <Form.Item label="Phone Number" name="phoneNumber">
+        <Input />
+      </Form.Item>
 
-    <Form.Item
-      label="Cascader"
-      name="Cascader"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <Cascader />
-    </Form.Item>
+      <Form.Item label="Active Plan" name="activePlan">
+        <Input readOnly />
+      </Form.Item>
 
-    <Form.Item
-      label="TreeSelect"
-      name="TreeSelect"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <TreeSelect />
-    </Form.Item>
+      <Form.Item label="Plan Expiry" name="planExpiry">
+        <Input readOnly />
+      </Form.Item>
 
-    <Form.Item
-      label="DatePicker"
-      name="DatePicker"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <DatePicker />
-    </Form.Item>
+      <Form.Item label="Address">
+        <Space size="small">
+          <Form.Item name={['address', 'street']} noStyle>
+            <Input placeholder="Street" />
+          </Form.Item>
+          <Form.Item name={['address', 'state']} noStyle>
+            <Input placeholder="State" />
+          </Form.Item>
+          <Form.Item name={['address', 'country']} noStyle>
+            <Input placeholder="Country" />
+          </Form.Item>
+          <Form.Item name={['address', 'pincode']} noStyle>
+            <Input placeholder="Pincode" />
+          </Form.Item>
+        </Space>
+      </Form.Item>
 
-    <Form.Item
-      label="RangePicker"
-      name="RangePicker"
-      rules={[{ required: true, message: 'Please input!' }]}
-    >
-      <RangePicker />
-    </Form.Item>
-
-    <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
-      <Button type="primary" htmlType="submit">
-        Submit
-      </Button>
-    </Form.Item>
-  </Form>
-        </>
-    )
-}
+      <Form.Item wrapperCol={{ offset: 6, span: 16 }}>
+      <Button type="primary" onClick={handleEditReset}>
+          {isEditing ? 'Reset' : 'Edit'}
+        </Button>
+        {isEditing && (
+          <Button type="primary" onClick={handleSave} style={{ marginLeft: 10 }}>
+            Save
+          </Button>
+        )}
+      </Form.Item>
+    </Form>
+  );
+};
 
 export default Profile;

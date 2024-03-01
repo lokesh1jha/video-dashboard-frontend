@@ -2,11 +2,13 @@ import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography } from 'antd';
 import { login } from '../api';
+import { useAuth } from '../AuthProvider';
 
 const { Title } = Typography;
 
 function Login() {
-    const navigate = useNavigate(); // Initialize useHistory hook
+    const navigate = useNavigate();
+    const { setIsLoggedIn } = useAuth();
 
     const onFinish = async (values) => {
         console.log('Received values:', values);
@@ -14,6 +16,7 @@ function Login() {
         let result = await login({email, password});
         if (result.token) {
             localStorage.setItem('Authorization', result.token);
+            setIsLoggedIn(true);
             navigate('/dashboard');
         } else {
             showNotification('error', 'Error', result.message);

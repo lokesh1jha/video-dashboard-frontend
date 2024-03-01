@@ -34,7 +34,6 @@ function AuthRoute() {
     };
 
     return (
-        <Router>
             <Layout style={{ minHeight: '100vh' }}>
                 <Sider trigger={null} collapsible collapsed={collapsed}>
                     <div className="demo-logo-vertical" />
@@ -78,7 +77,6 @@ function AuthRoute() {
                     </Routes>
                 </Layout>
             </Layout>
-        </Router>
     );
 }
 

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Route, Routes, Link, useLocation, useNavigate } from 'react-router-dom';
+import { Route, Routes, Link, useLocation, useNavigate } from 'react-router-dom';
 import Dashboard from '../pages/Dashboard';
 import { Layout, Menu, Button } from 'antd';
 import {
@@ -11,8 +11,9 @@ import {
 } from '@ant-design/icons';
 import Profile from '../pages/Profile';
 import History from '../pages/History';
+import UploadVideo from '../pages/serviceProvider/UploadVideo';
 
-const { Sider, Header } = Layout;
+const { Sider } = Layout;
 
 function AuthRoute() {
     const navigate = useNavigate();
@@ -71,6 +72,7 @@ function AuthRoute() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
+                    <Route path="/uploadvideo" element={<UploadVideo />} />
                 </Routes>
             </Layout>
         </Layout>

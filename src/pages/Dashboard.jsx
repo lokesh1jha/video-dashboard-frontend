@@ -7,6 +7,7 @@ import {
   VideoCameraOutlined,
 } from '@ant-design/icons';
 import { Layout, Menu, Button, theme } from 'antd';
+import AddSocialPlatform from '../components/AddSocialPlatform';
 const { Header, Sider, Content } = Layout;
 
 
@@ -30,6 +31,7 @@ const Dashboard = () => {
           }}
         >
           Content
+          <AddSocialPlatform />
         </Content>
       </Layout>
   );

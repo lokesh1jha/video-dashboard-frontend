@@ -1,0 +1,24 @@
+/* YoutubeAuthLogin.css */
+.container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+}
+
+.documentation {
+    flex: 1;
+    margin-right: 20px;
+}
+
+
+.form-container {
+    flex: 1;
+    display: flex;
+    justify-content: center;
+}
+
+.form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    border-radius: 5px;
+}

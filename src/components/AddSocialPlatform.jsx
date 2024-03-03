@@ -4,8 +4,8 @@ import { YoutubeOutlined, InstagramOutlined, FacebookOutlined } from '@ant-desig
 
 function AddSocialPlatform() {
   const handleConnect = (platform) => {
-    // Logic to connect to the selected social platform
-    console.log(`Connecting to ${platform}...`);
+    //redirect to youtubeauthwizard
+    window.location.href = `/youtubeauthwizard?platform=${platform}`;
   };
 
   return (
@@ -18,6 +18,7 @@ function AddSocialPlatform() {
               <p>YouTube</p>
             </Card>
           </Col>
+          {/* Features to be release in future versions
           <Col span={8} onClick={() => handleConnect('Instagram')}>
             <Card hoverable style={{ textAlign: 'center' }}>
               <InstagramOutlined style={{ fontSize: '32px', color: '#8a3ab9' }} />
@@ -29,7 +30,7 @@ function AddSocialPlatform() {
               <FacebookOutlined style={{ fontSize: '32px', color: '#3b5998' }} />
               <p>Facebook</p>
             </Card>
-          </Col>
+          </Col> */}
         </Row>
       </Card>
     </div>

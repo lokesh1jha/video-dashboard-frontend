@@ -1,10 +1,12 @@
 import React from 'react'
 import UploadYoutubeVideo from '../../components/UploadYoutubeVideo'
+import YoutubeAuthLogin from '../../components/YoutubeAuthLogin'
 
 function UploadVideo() {
   return (
     <>
-    <UploadYoutubeVideo />
+    <YoutubeAuthLogin />
+    {/* <UploadYoutubeVideo /> */}
     </>
   )
 }

@@ -12,6 +12,7 @@ import {
 import Profile from '../pages/Profile';
 import History from '../pages/History';
 import UploadVideo from '../pages/serviceProvider/UploadVideo';
+import YoutubeAuthLogin from '../components/YoutubeAuthLogin';
 
 const { Sider } = Layout;
 
@@ -72,7 +73,8 @@ function AuthRoute() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/uploadvideo" element={<UploadVideo />} />
+                    <Route path="/youtubeauthWizard" element={<YoutubeAuthLogin />} />
+                    <Route path="/" element={<UploadVideo />} />
                 </Routes>
             </Layout>
         </Layout>

@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
-import { Button, Input } from 'antd';
+import { Button, Input, Image } from 'antd';
 import './css/youtubeAuth.css'
-
 const YOUTUBE_REDIRECT_URL = 'http://localhost:5173/dashboard';
 
 function YoutubeAuthLogin() {
@@ -23,46 +22,85 @@ function YoutubeAuthLogin() {
       <div className="documentation">
         <h1>Welcome to YouTube Auth Wizard</h1>
         <br />
-        <div className="step">
-          <strong>Step 1:</strong> Turn on the YouTube Data API (Use your Google account on which your youtube channel is registered)
-        </div>
-        <ul>
-          <br />
-          <li>
-            Use this <a href='https://console.developers.google.com/start/api?id=youtube'>wizard</a> to create Google Developers Console.
-          </li>
-          <li>
-            Accept the term and conditions by marking the box and click on "Accept and continue"
-          </li>
-          <li>
-            Now
-            or select a project in the Google Developers Console and automatically turn on the API. Click Continue, then Go to credentials.
-            <img src={require("../assets/youtubeAuthImages/Youtube_auth_google_console_pic_1.png").default} alt="Wizard Screenshot" />
+        <div className="scroll-box">
+          <div className="step">
+            <strong>Step 1:</strong> Turn on the YouTube Data API (Use your Google account on which your YouTube channel is registered)
+          </div>
+          <ul>
+            <br />
+            <li>
+              Use this <a href='https://console.developers.google.com/start/api?id=youtube'>wizard</a> to create Google Developers Console.
+            </li>
+            <li>
+              Accept the term and conditions by marking the box and click on "Accept and continue"
+            </li>
+            <li>
+              If you are new to Google Cloud Console, then you will not have any Projects.
+            </li>
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485976/Youtube_auth_google_console_pic_1_ulspsk.png"
+            />
+            <li>
+              Click on "Select a Project" as you can see in the image. Then click on "New Project".
+            </li>
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485976/Youtube_auth_google_console_pic_2_swie9g.png"
+            />
 
-          </li>
-          <li>
-            On the Create credentials page, click the Cancel button.
-          </li>
-          <li>
-            At the top of the page, select the OAuth consent screen tab. Select an Email address, enter a Product name if not already set, and click the Save button.
-          </li>
-          <li>
-            Select the Credentials tab, click the Create credentials button and select OAuth client ID.
-          </li>
-          <li>
-            Select the application type Other, enter the name "YouTube Data API Quickstart", and click the Create button.
-          </li>
-          <li>
-            Click OK to dismiss the resulting dialog.
-          </li>
-          <li>
-            Click the <strong>Download JSON</strong> button to the right of the client ID.
-          </li>
-          <li>
-            Move the downloaded file to your working directory and rename it <strong>client_secret.json</strong>.
-          </li>
-        </ul>
+            <li>
+              In Project Name field, enter a name for your project. Ex: "YouTubeAPI".
+            </li>
+
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485976/Youtube_auth_google_console_pic_3_gwkz6x.png" />
+            <li>
+              Click on "Create Project".
+            </li>
+            Then Click on Next and the Enable, as you can see in the image.
+
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485976/Youtube_auth_google_console_pic_4_fubd2a.png" />
+            <br />
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485976/Youtube_auth_google_console_pic_5_j4jzzo.png" />
+            <li>
+              Then by clciking on Menu button and then on "APIs & Services". Then "Credentials".
+            </li>
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485977/Youtube_auth_google_console_pic_6_es6goq.png"
+            />
+            <Image
+              width={500}
+              src="https://res.cloudinary.com/dywazof7j/image/upload/v1709485977/Youtube_auth_google_console_pic_7_uahefh.png"
+            />
+            <li>
+              At the top of the page, select the OAuth consent screen tab. Select an Email address, enter a Product name if not already set, and click the Save button.
+            </li>
+            <li>
+              Select the Credentials tab, click the Create credentials button and select OAuth client ID.
+            </li>
+            <li>
+              Select the application type Other, enter the name "YouTube Data API Quickstart", and click the Create button.
+            </li>
+            <li>
+              Click OK to dismiss the resulting dialog.
+            </li>
+            <li>
+              Click the <strong>Download JSON</strong> button to the right of the client ID.
+            </li>
+            <li>
+              Move the downloaded file to your working directory and rename it <strong>client_secret.json</strong>.
+            </li>
+          </ul>
+        </div>
       </div>
+
       <div className="form-container">
         <div className="form">
           <Input

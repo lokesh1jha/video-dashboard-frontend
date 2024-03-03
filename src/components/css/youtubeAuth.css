@@ -1,24 +1,57 @@
-/* YoutubeAuthLogin.css */
+/* youtubeAuth.css */
+
 .container {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-}
+    height: 100vh; /* Full height of the viewport */
+  }
 
-.documentation {
+  .documentation {
     flex: 1;
     margin-right: 20px;
-}
-
-
-.form-container {
-    flex: 1;
     display: flex;
+    flex-direction: column;
     justify-content: center;
-}
-
-.form {
+    align-items: center;
+    background-color: #f0f0f0; /* Background color */
+    padding: 20px;
+    border-radius: 10px;
+  }
+  
+  .documentation h1 {
+    text-align: center;
+  }
+  
+  
+  .scroll-box {
+    height: calc(100vh - 100px); /* Adjust as needed */
+    overflow-y: auto;
+    padding-right: 20px; /* Add padding to avoid overlaying scrollbar */
+    padding-left: 20px; /* Add left padding */
+  }
+  
+  
+  .step {
+    margin-bottom: 20px;
+  }
+  
+  .form-container {
+    flex: 1;
+  }
+  
+  .form {
     border: 1px solid #ccc;
     padding: 20px;
     border-radius: 5px;
-}
+  }
+  
+  img {
+    display: block;
+    margin-bottom: 20px;
+  }
+  
+  .documentation li {
+    margin-bottom: 20px; /* Adjust as needed */
+  }
+  

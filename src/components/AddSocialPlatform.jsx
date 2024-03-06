@@ -5,7 +5,7 @@ import { YoutubeOutlined, InstagramOutlined, FacebookOutlined } from '@ant-desig
 function AddSocialPlatform() {
   const handleConnect = (platform) => {
     //redirect to youtubeauthwizard
-    window.location.href = `/youtubeauthwizard?platform=${platform}`;
+    window.location.href = `/youtubeauthwizard`;
   };
 
   return (

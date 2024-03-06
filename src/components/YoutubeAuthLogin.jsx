@@ -1,16 +1,29 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Input, Image } from 'antd';
 import './css/youtubeAuth.css'
+import { useAuth } from '../AuthProvider';
 const YOUTUBE_REDIRECT_URL = 'http://localhost:5173/dashboard';
 
 function YoutubeAuthLogin() {
   const [clientId, setClientId] = useState('');
+  const [secretID, setSecretID] = useState('');
+  const { youtubeClientId, setYoutubeClientId, setClientSecret } = useAuth();
 
+  function setContextValues (id, secret) {
+    setYoutubeClientId(id)
+    setClientSecret(secret)
+  }
   const handleLogin = async () => {
+    //get form valus
     const formDetails = {
       clientId: clientId,
+      client_secret: secretID,
       redirectUrl: YOUTUBE_REDIRECT_URL
     };
+console.log(formDetails)
+console.log(youtubeClientId, clientId, secretID)
+
+    setContextValues(formDetails.clientId, formDetails.client_secret)
     const redirect_uri = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${formDetails.clientId}&redirect_uri=${formDetails.redirectUrl}&scope=https://www.googleapis.com/auth/youtube`
     window.location.href = redirect_uri
     // will land on dashboard
@@ -109,7 +122,20 @@ function YoutubeAuthLogin() {
             value={clientId}
             onChange={e => setClientId(e.target.value)}
           />
-          <Button type="primary" onClick={handleLogin}>Login with Google</Button>
+          <Input
+            placeholder="Client Secret"
+            style={{ marginBottom: '10px' }}
+            value={secretID}
+            onChange={e => setSecretID(e.target.value)}
+          />
+          <Button
+            type="primary"
+            onClick={handleLogin}
+            disabled={!(clientId.trim() && secretID.trim())}
+          >
+            Login with Google
+          </Button>
+
         </div>
       </div>
     </div>

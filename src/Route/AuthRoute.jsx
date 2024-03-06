@@ -13,6 +13,7 @@ import Profile from '../pages/Profile';
 import History from '../pages/History';
 import UploadVideo from '../pages/serviceProvider/UploadVideo';
 import YoutubeAuthLogin from '../components/YoutubeAuthLogin';
+import Home from '../pages/Home';
 
 const { Sider } = Layout;
 
@@ -37,29 +38,34 @@ function AuthRoute() {
         }
     };
 
+    // Conditionally render the Sider component based on the current route
+    const isHomeRoute = location.pathname === '/home';
+
     return (
         <Layout style={{ minHeight: '100vh' }}>
-            <Sider trigger={null} collapsible collapsed={collapsed}>
-                <div className="demo-logo-vertical" />
-                <Menu
-                    theme="dark"
-                    mode="inline"
-                    selectedKeys={[location.pathname]}
-                    onClick={({ key }) => handleMenuClick(key)}
-                >
-                    <Menu.Item key="/dashboard" icon={<UserOutlined />} >
-                        <Link to="/dashboard">Dashboard</Link>
-                    </Menu.Item>
-                    <Menu.Item key="/history" icon={<VideoCameraOutlined />}>
-                        <Link to="/history">History</Link>
-                    </Menu.Item>
-                    <Menu.Item key="/profile" icon={<UploadOutlined />}>
-                        <Link to="/profile">Profile</Link>
-                    </Menu.Item>
-                </Menu>
-            </Sider>
+            {!isHomeRoute && (
+                <Sider trigger={null} collapsible collapsed={collapsed}>
+                    <div className="demo-logo-vertical" />
+                    <Menu
+                        theme="dark"
+                        mode="inline"
+                        selectedKeys={[location.pathname]}
+                        onClick={({ key }) => handleMenuClick(key)}
+                    >
+                        <Menu.Item key="/dashboard" icon={<UserOutlined />} >
+                            <Link to="/dashboard">Dashboard</Link>
+                        </Menu.Item>
+                        <Menu.Item key="/history" icon={<VideoCameraOutlined />}>
+                            <Link to="/history">History</Link>
+                        </Menu.Item>
+                        <Menu.Item key="/profile" icon={<UploadOutlined />}>
+                            <Link to="/profile">Profile</Link>
+                        </Menu.Item>
+                    </Menu>
+                </Sider>
+            )}
             <Layout className="site-layout">
-                <Button
+                {!isHomeRoute && (<Button
                     type="text"
                     icon={collapsed ? <MenuUnfoldOutlined /> : <MenuFoldOutlined />}
                     onClick={() => setCollapsed(!collapsed)}
@@ -68,13 +74,14 @@ function AuthRoute() {
                         width: 64,
                         height: 64,
                     }}
-                />
+                />)}
                 <Routes>
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
                     <Route path="/youtubeauthWizard" element={<YoutubeAuthLogin />} />
                     <Route path="/" element={<UploadVideo />} />
+                    <Route path="/home" element={<Home />} />
                 </Routes>
             </Layout>
         </Layout>

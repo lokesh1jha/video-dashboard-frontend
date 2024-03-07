@@ -79,7 +79,7 @@ function AuthRoute() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/youtubeauthWizard" element={<YoutubeAuthLogin />} />
+                    <Route path="/youtubeauthwizard" element={<YoutubeAuthLogin />} />
                     <Route path="/" element={<UploadVideo />} />
                     <Route path="/home" element={<Home />} />
                 </Routes>

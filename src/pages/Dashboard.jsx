@@ -3,25 +3,24 @@ import { Layout, theme } from 'antd';
 import AddSocialPlatform from '../components/AddSocialPlatform';
 import showNotification from '../components/showNotification';
 import axios from 'axios';
-import { useAuth } from '../AuthProvider';
+import DashboardStats from '../components/DashboardStats';
 
 const { Content } = Layout;
 
 const Dashboard = () => {
   const { token } = theme.useToken() || {};
   const { colorBgContainer, borderRadiusLG } = token || {};
-
-  const { youtubeClientId, setYoutubeClientId, clientSecret, setClientSecret } = useAuth();
+  const youtubeLogined = false;
 
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
-    console.log('Code:', code, youtubeClientId, clientSecret);
-    if (code && youtubeClientId && clientSecret) {
+
+    if (code) {
       showNotification('success', 'Auth Success', 'YouTube Authentication Successful');
 
       axios.post('http://localhost:5000/saveyoutubedetails',
-        { code, clientId: youtubeClientId, clientSecret },
+        { code },
         {
           headers: {
             Authorization: `${localStorage.getItem('Authorization')}` // Assuming your token is stored in localStorage
@@ -30,17 +29,16 @@ const Dashboard = () => {
       )
         .then(response => {
           console.log(response);
-          setYoutubeClientId(null); // Reset the client ID after authentication
-          setClientSecret(null); // Reset the client secret after authentication
         })
         .catch(error => {
           console.error('Error:', error);
         });
 
-
-      console.log('Code found:', code);
+      //clear url extra part leave till dashboard
+      window.history.replaceState({}, document.title, window.location.pathname);
+      window.location.href = '/dashboard';
     }
-  }, [youtubeClientId, clientSecret, setYoutubeClientId, setClientSecret]);
+  }, []);
 
   return (
     <Layout>
@@ -53,8 +51,9 @@ const Dashboard = () => {
           borderRadius: borderRadiusLG,
         }}
       >
-        Content
-        <AddSocialPlatform />
+        {youtubeLogined ?
+          <AddSocialPlatform />
+        : <DashboardStats />}
       </Content>
     </Layout>
   );

@@ -42,7 +42,7 @@ This will start the development server and open the application in your default 
 
 2. Access the application:
 
-Navigate to [http://localhost:3000](http://localhost:3000) in your web browser to access the Video Dashboard frontend.
+Navigate to [http://localhost:3000](http://localhost:5173) in your web browser to access the Video Dashboard frontend.
 
 ## Deployment
 

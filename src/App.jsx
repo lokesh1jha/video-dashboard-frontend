@@ -8,7 +8,7 @@ import { jwtDecode } from 'jwt-decode';
 
 function App() {
   const navigate = useNavigate();
-  const { isLoggedIn, setIsLoggedIn } = useAuth()
+  const { isLoggedIn, setIsLoggedIn, user, setUser } = useAuth()
 
   useEffect(() => {
     const token = localStorage.getItem('Authorization');
@@ -26,6 +26,9 @@ function App() {
           navigate('/login');
         } else {
           // Token is still valid, set isLoggedIn to true
+          let newUserContent = user
+          newUserContent.is_youtube_authenticated = decodedToken.is_youtube_authenticated;
+          setUser(newUserContent);
           setIsLoggedIn(true);
         }
       } catch (error) {

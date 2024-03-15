@@ -54,94 +54,96 @@ const DashboardStats = () => {
     console.log(value)
     setSelectedAction(value);
   };
-  
+
   const handleCancel = () => {
     setVisible(false);
   };
 
   return (
-    <div style={{ padding: '20px' }}>
-      <h1>Welcome, Lokesh</h1>
+    <>
+      <div style={{ padding: '20px' }}>
+        <h1>Welcome, Lokesh</h1>
 
-      <Row gutter={16} style={{ marginTop: '20px' }}>
-        <Col span={6}>
-          <Card title="Total Videos" bodyStyle={{ textAlign: 'center' }}>
-            <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
-              {mockData.totalVideos}
-            </span>
-          </Card>
-        </Col>
+        <Row gutter={16} style={{ marginTop: '20px' }}>
+          <Col span={6}>
+            <Card title="Total Videos" bodyStyle={{ textAlign: 'center' }}>
+              <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
+                {mockData.totalVideos}
+              </span>
+            </Card>
+          </Col>
 
-        <Col span={6}>
-          <Card title="Pending Videos">{mockData.pendingVideos}</Card>
-        </Col>
+          <Col span={6}>
+            <Card title="Pending Videos">{mockData.pendingVideos}</Card>
+          </Col>
 
-        <Col span={6}>
-          <Card title="Approved Videos">{mockData.approvedVideos}</Card>
-        </Col>
+          <Col span={6}>
+            <Card title="Approved Videos">{mockData.approvedVideos}</Card>
+          </Col>
 
-        <Col span={6}>
-          <Card title="Rejected Videos">{mockData.rejectedVideos}</Card>
-        </Col>
-      </Row>
+          <Col span={6}>
+            <Card title="Rejected Videos">{mockData.rejectedVideos}</Card>
+          </Col>
+        </Row>
 
-      <Row gutter={16} style={{ marginTop: '20px' }}>
-        <Col span={12}>
-          <div style={{ marginTop: '20px' }}>
-            <h2>Pending Videos</h2>
-            <List
-              dataSource={mockData.pendingList}
-              renderItem={(item) => (
-                <List.Item>
-                  <span>{item.name}</span>
-                  <span style={{ marginLeft: '20px' }}>{item.availableDate}</span>
-                  <span style={{ marginLeft: '20px' }}>{item.expiryDate}</span>
-                  <Button type="primary" onClick={showModal}>Action</Button>
-                </List.Item>
-              )}
-            />
-          </div>
-        </Col>
+        <Row gutter={16} style={{ marginTop: '20px' }}>
+          <Col span={12}>
+            <div style={{ marginTop: '20px' }}>
+              <h2>Pending Videos</h2>
+              <List
+                dataSource={mockData.pendingList}
+                renderItem={(item) => (
+                  <List.Item>
+                    <span>{item.name}</span>
+                    <span style={{ marginLeft: '20px' }}>{item.availableDate}</span>
+                    <span style={{ marginLeft: '20px' }}>{item.expiryDate}</span>
+                    <Button type="primary" onClick={showModal}>Action</Button>
+                  </List.Item>
+                )}
+              />
+            </div>
+          </Col>
 
-        {/* Upload Frequency */}
-        <Col span={12}>
-          <div style={{ marginTop: '20px' }}>
-            <h2>Upload Frequency</h2>
-            <Calendar cellRender={() => dateCellRender} fullscreen={false} />
-          </div>
-        </Col>
-      </Row>
+          {/* Upload Frequency */}
+          <Col span={12}>
+            <div style={{ marginTop: '20px' }}>
+              <h2>Upload Frequency</h2>
+              <Calendar cellRender={() => dateCellRender} fullscreen={false} />
+            </div>
+          </Col>
+        </Row>
 
-      <Modal
-        title="Action"
-        visible={visible}
-        onOk={handleSubmit}
-        onCancel={handleCancel}
-      >
-        <Dropdown
-          options={[
-            {
-              label: 'Approve',
-              value: 'Approve',
-            },
-            {
-              label: 'Reject',
-              value: 'Reject',
-            },
-          ]}
-          onChange={handleActionSelect}
+        <Modal
+          title="Action"
+          visible={visible}
+          onOk={handleSubmit}
+          onCancel={handleCancel}
         >
-          
-        </Dropdown>
-        {selectedAction === 'Reject' && (
-          <Input
-            placeholder="Rejection reason"
-            value={rejectionReason}
-            onChange={(e) => setRejectionReason(e.target.value)}
-          />
-        )}
-      </Modal>
-    </div>
+          <Dropdown
+            options={[
+              {
+                label: 'Approve',
+                value: 'Approve',
+              },
+              {
+                label: 'Reject',
+                value: 'Reject',
+              },
+            ]}
+            onChange={handleActionSelect}
+          >
+
+          </Dropdown>
+          {selectedAction === 'Reject' && (
+            <Input
+              placeholder="Rejection reason"
+              value={rejectionReason}
+              onChange={(e) => setRejectionReason(e.target.value)}
+            />
+          )}
+        </Modal>
+      </div>
+    </>
   );
 };
 

@@ -29,16 +29,17 @@ function YoutubeAuthLogin() {
         }
       }
     )
-    .then(response => {
-      console.log(response);
-    })
-    .catch(error => {
-      console.log(error);
-    });
-    const redirect_uri = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${formDetails.clientId}&redirect_uri=${formDetails.redirectUrl}&scope=https://www.googleapis.com/auth/youtube`
-    window.location.href = redirect_uri
-    // will land on dashboard
-    console.log('Initiating OAuth flow...');
+      .then(response => {
+        console.log(response);
+        const redirect_uri = `https://accounts.google.com/o/oauth2/v2/auth?response_type=code&client_id=${formDetails.clientId}&redirect_uri=${formDetails.redirectUrl}&scope=https://www.googleapis.com/auth/youtube`
+        window.location.href = redirect_uri
+        // will land on dashboard
+        console.log('Initiating OAuth flow...');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
   };
 
   return (

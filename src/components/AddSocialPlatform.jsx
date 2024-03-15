@@ -9,6 +9,7 @@ function AddSocialPlatform() {
   };
 
   return (
+    <>
     <div style={{ padding: '20px' }}>
       <Card title="Add a Social Platform">
         <Row gutter={[16, 16]}>
@@ -34,6 +35,7 @@ function AddSocialPlatform() {
         </Row>
       </Card>
     </div>
+    </>
   );
 }
 

@@ -4,14 +4,17 @@ import AddSocialPlatform from '../components/AddSocialPlatform';
 import showNotification from '../components/showNotification';
 import axios from 'axios';
 import DashboardStats from '../components/DashboardStats';
+import { useAuth } from '../AuthProvider';
 
 const { Content } = Layout;
 
 const Dashboard = () => {
+  const {user} = useAuth()
   const { token } = theme.useToken() || {};
   const { colorBgContainer, borderRadiusLG } = token || {};
-  const youtubeLogined = false;
+  const youtubeLogined = user.is_youtube_authenticated == 1;
 
+  
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
@@ -27,7 +30,7 @@ const Dashboard = () => {
           }
         }
       )
-        .then(response => {
+        .tAddSocialPlatformhen(response => {
           console.log(response);
         })
         .catch(error => {
@@ -35,8 +38,8 @@ const Dashboard = () => {
         });
 
       //clear url extra part leave till dashboard
-      window.history.replaceState({}, document.title, window.location.pathname);
-      window.location.href = '/dashboard';
+      // window.history.replaceState({}, document.title, window.location.pathname);
+      // window.location.href = '/dashboard';
     }
   }, []);
 
@@ -52,8 +55,8 @@ const Dashboard = () => {
         }}
       >
         {youtubeLogined ?
-          <AddSocialPlatform />
-        : <DashboardStats />}
+          <DashboardStats />
+        : <AddSocialPlatform />}
       </Content>
     </Layout>
   );

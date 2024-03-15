@@ -66,7 +66,7 @@ const DashboardStats = () => {
 
         <Row gutter={16} style={{ marginTop: '20px' }}>
           <Col span={6}>
-            <Card title="Total Videos" bodyStyle={{ textAlign: 'center' }}>
+            <Card title="Total Videos" styles={{ header: { textAlign: 'center' }, body: { textAlign: 'center' } }}>
               <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
                 {mockData.totalVideos}
               </span>
@@ -74,15 +74,27 @@ const DashboardStats = () => {
           </Col>
 
           <Col span={6}>
-            <Card title="Pending Videos">{mockData.pendingVideos}</Card>
+            <Card title="Pending Videos" styles={{ header: { textAlign: 'center' }, body: { textAlign: 'center' } }}>
+              <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
+                {mockData.pendingVideos}
+              </span>
+            </Card>
           </Col>
 
           <Col span={6}>
-            <Card title="Approved Videos">{mockData.approvedVideos}</Card>
+            <Card title="Approved Videos" styles={{ header: { textAlign: 'center' }, body: { textAlign: 'center' } }}>
+              <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
+                {mockData.approvedVideos}
+              </span>
+            </Card>
           </Col>
 
           <Col span={6}>
-            <Card title="Rejected Videos">{mockData.rejectedVideos}</Card>
+            <Card title="Rejected Videos" styles={{ header: { textAlign: 'center' }, body: { textAlign: 'center' } }}>
+              <span style={{ fontWeight: 'bold', fontSize: '35px' }}>
+                {mockData.rejectedVideos}
+              </span>
+            </Card>
           </Col>
         </Row>
 
@@ -115,7 +127,7 @@ const DashboardStats = () => {
 
         <Modal
           title="Action"
-          visible={visible}
+          open={visible}
           onOk={handleSubmit}
           onCancel={handleCancel}
         >
@@ -131,9 +143,7 @@ const DashboardStats = () => {
               },
             ]}
             onChange={handleActionSelect}
-          >
-
-          </Dropdown>
+          />
           {selectedAction === 'Reject' && (
             <Input
               placeholder="Rejection reason"
@@ -142,6 +152,7 @@ const DashboardStats = () => {
             />
           )}
         </Modal>
+
       </div>
     </>
   );

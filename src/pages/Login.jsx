@@ -3,19 +3,24 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography } from 'antd';
 import { login } from '../api';
 import { useAuth } from '../AuthProvider';
+import showNotification from '../components/showNotification';
 
 const { Title } = Typography;
 
 function Login() {
     const navigate = useNavigate();
-    const { setIsLoggedIn } = useAuth();
+    const { setIsLoggedIn, user, setUser} = useAuth();
 
     const onFinish = async (values) => {
         console.log('Received values:', values);
         let { email, password } = values;
         let result = await login({email, password});
-        if (result.token) {
+        if (result.status == 200 && result.token) {
+            console.log(result)
             localStorage.setItem('Authorization', result.token);
+            let newUserInstance = user;
+            newUserInstance.is_youtube_authenticated=result.is_youtube_authenticated
+            setUser(newUserInstance)
             setIsLoggedIn(true);
             navigate('/dashboard');
         } else {

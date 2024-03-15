@@ -17,7 +17,6 @@ const Signup = () => {
         let result = await register({ username, email, password, user_type });
         if (result.status === 200) {
             showNotification('success', 'Success', 'User registered successfully');
-            console.log('Navigating to login page');
             navigate('/login');
         } else {
             showNotification('error', 'Error', result.message);

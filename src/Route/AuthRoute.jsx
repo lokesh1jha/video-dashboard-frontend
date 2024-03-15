@@ -14,6 +14,7 @@ import History from '../pages/History';
 import UploadVideo from '../pages/serviceProvider/UploadVideo';
 import YoutubeAuthLogin from '../components/YoutubeAuthLogin';
 import Home from '../pages/Home';
+import { logout } from '../api';
 
 const { Sider } = Layout;
 
@@ -41,6 +42,10 @@ function AuthRoute() {
     // Conditionally render the Sider component based on the current route
     const isHomeRoute = location.pathname === '/home';
 
+    const handleLogout = async () => {
+        await logout()
+        console.log("logout")
+    }
     return (
         <Layout style={{ minHeight: '100vh' }}>
             {!isHomeRoute && (
@@ -62,6 +67,10 @@ function AuthRoute() {
                             <Link to="/profile">Profile</Link>
                         </Menu.Item>
                     </Menu>
+
+                    <div style={{ position: 'absolute', bottom: '20px', left: '50%', transform: 'translateX(-50%)' }}>
+                        <Button type="primary" onClick={handleLogout}>Logout</Button>
+                    </div>
                 </Sider>
             )}
             <Layout className="site-layout">

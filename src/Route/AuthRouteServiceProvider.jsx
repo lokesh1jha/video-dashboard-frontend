@@ -15,6 +15,7 @@ import UploadVideo from '../pages/serviceProvider/UploadVideo';
 import Home from '../pages/Home';
 import { logout } from '../api';
 import DashboardServiceProvider from '../pages/serviceProvider/DashboardServiceProvider';
+import UploadYoutubeVideo from '../components/UploadYoutubeVideo';
 
 const { Sider } = Layout;
 
@@ -94,7 +95,7 @@ function AuthRouteServiceProvider() {
                     <Route path="/dashboard" element={<DashboardServiceProvider />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/uploadvideo" element={<UploadVideo />} />
+                    <Route path="/uploadvideo" element={<UploadYoutubeVideo />} />
                     <Route path="/home" element={<Home />} />
                 </Routes>
             </Layout>

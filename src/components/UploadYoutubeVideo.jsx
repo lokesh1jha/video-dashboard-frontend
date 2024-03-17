@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Form, Input, Upload, Button, Select, Tag, message } from 'antd';
+import { Form, Input, Upload, Button, Select, Tag } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
 
 const { Option } = Select;
@@ -13,14 +13,12 @@ function UploadYoutubeVideo() {
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef(null);
 
-
-  // tags start
-
   useEffect(() => {
     if (inputVisible) {
       inputRef.current?.focus();
     }
   }, [inputVisible]);
+
   const handleVideoUpload = (file) => {
     setVideoFile(file);
   };
@@ -48,7 +46,21 @@ function UploadYoutubeVideo() {
 
   const onFinish = (values) => {
     console.log('Form values:', values);
-    // Here, you can send the form data to the server for processing
+    startUpload(values);
+  };
+
+  const startUpload = (formData) => {
+    console.log('Form data:', formData);
+    console.log('Video file:', videoFile);
+    console.log('Thumbnail file:', thumbnailFile);
+    // Example API call:
+    // fetch('your-upload-api-endpoint', {
+    //   method: 'POST',
+    //   body: formData,
+    // })
+    // .then(response => response.json())
+    // .then(data => console.log('Upload response:', data))
+    // .catch(error => console.error('Upload error:', error));
   };
 
   return (
@@ -61,7 +73,7 @@ function UploadYoutubeVideo() {
         initialValues={{
           language: 'en',
           visibility: 'private',
-          tags: []
+          tags: [],
         }}
       >
         <Form.Item
@@ -142,9 +154,13 @@ function UploadYoutubeVideo() {
             </Tag>
           )}
         </Form.Item>
+
         <Form.Item>
-          <Button type="primary" htmlType="submit">Upload</Button>
+          <Button type="primary" htmlType="submit">
+            Upload
+          </Button>
         </Form.Item>
+        
       </Form>
     </div>
   );

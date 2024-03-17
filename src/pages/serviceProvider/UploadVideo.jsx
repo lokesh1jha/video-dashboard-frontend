@@ -5,8 +5,8 @@ import YoutubeAuthLogin from '../../components/YoutubeAuthLogin'
 function UploadVideo() {
   return (
     <>
-    <YoutubeAuthLogin />
-    {/* <UploadYoutubeVideo /> */}
+    {/* <YoutubeAuthLogin /> */}
+    <UploadYoutubeVideo />
     </>
   )
 }

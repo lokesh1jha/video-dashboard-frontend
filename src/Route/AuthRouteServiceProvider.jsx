@@ -12,13 +12,13 @@ import {
 import Profile from '../pages/Profile';
 import History from '../pages/History';
 import UploadVideo from '../pages/serviceProvider/UploadVideo';
-import YoutubeAuthLogin from '../components/YoutubeAuthLogin';
 import Home from '../pages/Home';
 import { logout } from '../api';
+import DashboardServiceProvider from '../pages/serviceProvider/DashboardServiceProvider';
 
 const { Sider } = Layout;
 
-function AuthRoute() {
+function AuthRouteServiceProvider() {
     const navigate = useNavigate();
     const location = useLocation();
     const [collapsed, setCollapsed] = useState(false);
@@ -29,9 +29,12 @@ function AuthRoute() {
                 navigate('/dashboard');
                 break;
             case '2':
-                navigate('/history');
+                navigate('/uploadvideo');
                 break;
             case '3':
+                navigate('/history');
+                break;
+            case '4':
                 navigate('/profile');
                 break;
             default:
@@ -60,6 +63,9 @@ function AuthRoute() {
                         <Menu.Item key="/dashboard" icon={<UserOutlined />} >
                             <Link to="/dashboard">Dashboard</Link>
                         </Menu.Item>
+                        <Menu.Item key="/uploadvideo" icon={<UploadOutlined />}>
+                            <Link to="/uploadvideo">Upload Video</Link>
+                        </Menu.Item>
                         <Menu.Item key="/history" icon={<VideoCameraOutlined />}>
                             <Link to="/history">History</Link>
                         </Menu.Item>
@@ -85,11 +91,10 @@ function AuthRoute() {
                     }}
                 />)}
                 <Routes>
-                    <Route path="/dashboard" element={<Dashboard />} />
+                    <Route path="/dashboard" element={<DashboardServiceProvider />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/youtubeauthwizard" element={<YoutubeAuthLogin />} />
-                    <Route path="/" element={<UploadVideo />} />
+                    <Route path="/uploadvideo" element={<UploadVideo />} />
                     <Route path="/home" element={<Home />} />
                 </Routes>
             </Layout>
@@ -97,4 +102,4 @@ function AuthRoute() {
     );
 }
 
-export default AuthRoute;
+export default AuthRouteServiceProvider;

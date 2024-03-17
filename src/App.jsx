@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import './App.css';
-import AuthRoute from './Route/AuthRoute.jsx';
+import AuthRouteClent from './Route/AuthRouteClent.jsx';
 import NonAuthRoute from './Route/NonAuthRoute.jsx';
 import { useAuth } from './AuthProvider.jsx';
 import { useNavigate } from 'react-router-dom';
 import { getDecodedJWT } from './api/index.js';
+import AuthRouteServiceProvider from './Route/AuthRouteServiceProvider.jsx';
 
 function App() {
   const navigate = useNavigate();
@@ -25,6 +26,7 @@ function App() {
         } else {
           let newUserContent = user
           newUserContent.is_youtube_authenticated = decodedToken.is_youtube_authenticated;
+          newUserContent.user_type = decodedToken.user_type;
           setUser(newUserContent);
           setIsLoggedIn(true);
         }
@@ -35,15 +37,21 @@ function App() {
         navigate('/login');
       }
     } else {
-      setIsLoggedIn(false);
-      navigate('/login');
+      if (isLoggedIn) {
+        setIsLoggedIn(false);
+        navigate('/login');
+      }
     }
-  }, [navigate, setIsLoggedIn]);
+  }, [navigate, setIsLoggedIn, user]);
 
-  
+
   return (
     <>
-      {isLoggedIn ? <AuthRoute /> : <NonAuthRoute />}
+      {isLoggedIn
+        ? (user.user_type && user.user_type == "client")
+          ? <AuthRouteClent />
+          : <AuthRouteServiceProvider />
+        : <NonAuthRoute />}
     </>
   );
 }

@@ -24,6 +24,7 @@ const Signup = () => {
     };
     
     return (
+        <>
         <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
             <Title level={2}>Sign Up</Title>
             <Form
@@ -91,6 +92,7 @@ const Signup = () => {
             </Form>
             Already Registered? <Link to="/login">Login</Link>
         </div>
+        </>
     );
 };
 

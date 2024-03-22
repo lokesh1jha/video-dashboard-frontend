@@ -11,9 +11,7 @@ import {
 } from '@ant-design/icons';
 import Profile from '../pages/Profile';
 import History from '../pages/History';
-import UploadVideo from '../pages/serviceProvider/UploadVideo';
 import Home from '../pages/Home';
-import { logout } from '../api';
 import DashboardServiceProvider from '../pages/serviceProvider/DashboardServiceProvider';
 import UploadYoutubeVideo from '../components/UploadYoutubeVideo';
 
@@ -47,8 +45,8 @@ function AuthRouteServiceProvider() {
     const isHomeRoute = location.pathname === '/home';
 
     const handleLogout = async () => {
-        await logout()
-        console.log("logout")
+        localStorage.removeItem('Authorization');
+        window.location.reload();
     }
     return (
         <Layout style={{ minHeight: '100vh' }}>

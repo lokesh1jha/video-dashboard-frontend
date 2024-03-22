@@ -26,17 +26,6 @@ export const register = async (credentials) => {
 };
 
 
-export const logout = async () => {
-  const navigate = useNavigate();
-  try {
-    console.log("-----------------")
-    localStorage.removeItem('Authorization');
-    navigate("/login");
-  } catch (error) {
-    console.log(error);
-  }
-};
-
 export const getDecodedJWT = (token) => {
   try {
     return jwtDecode(token)

@@ -29,7 +29,7 @@ const Dashboard = () => {
         { code },
         {
           headers: {
-            Authorization: `${localStorage.getItem('Authorization')}` // Assuming your token is stored in localStorage
+            Authorization: `${localStorage.getItem('Authorization')}`
           }
         }
       )

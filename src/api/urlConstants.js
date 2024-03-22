@@ -4,7 +4,6 @@ const BASE_URL =  "http://localhost:5000"
 export const URLConstants = {
     login: `${BASE_URL}/auth/login`,
     register: `${BASE_URL}/auth/register`,
-    logout: `${BASE_URL}/logout`,
     videos: `${BASE_URL}/videos`,
     saveYoutubeDetails: `${BASE_URL}/saveyoutubedetails`,
 };

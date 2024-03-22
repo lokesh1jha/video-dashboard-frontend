@@ -6,6 +6,7 @@ export const URLConstants = {
     register: `${BASE_URL}/auth/register`,
     videos: `${BASE_URL}/videos`,
     saveYoutubeDetails: `${BASE_URL}/saveyoutubedetails`,
+    uploadTocloud: `${BASE_URL}/uploadtocloud`,
 };
 
 const clientId = "267936848773-tml5tfm219hn7uig6t4e1qjrg9b6ar2n.apps.googleusercontent.com"

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, useNavigate } from 'react-router-dom';
 import { Form, Input, Button, Typography } from 'antd';
-import { login } from '../api';
+import { getDecodedJWT, login, setJwtToken } from '../api';
 import { useAuth } from '../AuthProvider';
 import showNotification from '../components/showNotification';
 
@@ -13,13 +13,16 @@ function Login() {
 
     const onFinish = async (values) => {
         console.log('Received values:', values);
+
         let { email, password } = values;
         let result = await login({email, password});
+
         if (result.status == 200 && result.token) {
-            console.log(result)
-            localStorage.setItem('Authorization', result.token);
+            setJwtToken(result.token);
+            const tokenData = getDecodedJWT(result.token);
             let newUserInstance = user;
-            newUserInstance.is_youtube_authenticated=result.is_youtube_authenticated
+            newUserInstance.is_youtube_authenticated=tokenData.is_youtube_authenticated
+            newUserInstance.user_type= tokenData.user_data;
             setUser(newUserInstance)
             setIsLoggedIn(true);
             navigate('/dashboard');

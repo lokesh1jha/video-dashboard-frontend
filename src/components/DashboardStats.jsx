@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Card, Row, Col, List, Button, Modal, Dropdown, Input, Calendar } from 'antd';
-
+import influencer from "../assets/dashboard_influencer.svg"
 const DashboardStats = () => {
   const [selectedAction, setSelectedAction] = useState('');
   const [rejectionReason, setRejectionReason] = useState('');
@@ -98,31 +98,22 @@ const DashboardStats = () => {
           </Col>
         </Row>
 
-        <Row gutter={16} style={{ marginTop: '20px' }}>
+        <Row gutter={10} style={{ marginTop: '20px' }}>
           <Col span={12}>
-            <div style={{ marginTop: '20px' }}>
-              <h2>Pending Videos</h2>
-              <List
-                dataSource={mockData.pendingList}
-                renderItem={(item) => (
-                  <List.Item>
-                    <span>{item.name}</span>
-                    <span style={{ marginLeft: '20px' }}>{item.availableDate}</span>
-                    <span style={{ marginLeft: '20px' }}>{item.expiryDate}</span>
-                    <Button type="primary" onClick={showModal}>Action</Button>
-                  </List.Item>
-                )}
-              />
+            <div style={{ marginTop: '20px', textAlign: 'center', height: '40px' }}>
+              <img src={influencer} alt="" />
             </div>
           </Col>
-
+          
           {/* Upload Frequency */}
-          <Col span={12}>
+          <Col span={10}>
             <div style={{ marginTop: '20px' }}>
               <h2>Upload Frequency</h2>
               <Calendar cellRender={() => dateCellRender} fullscreen={false} />
             </div>
           </Col>
+
+
         </Row>
 
         <Modal

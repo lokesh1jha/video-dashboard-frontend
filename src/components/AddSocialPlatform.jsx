@@ -1,25 +1,25 @@
 import React from 'react';
 import { Card, Row, Col } from 'antd';
 import { YoutubeOutlined, InstagramOutlined, FacebookOutlined } from '@ant-design/icons';
+import { URLConstants } from '../api/urlConstants';
 
 function AddSocialPlatform() {
-  const handleConnect = (platform) => {
-    //redirect to youtubeauthwizard
-    window.location.href = `/youtubeauthwizard`;
+  const handleConnect = async (platform) => {
+    window.location.href = URLConstants.YOUTUBE_AUTH_URL;
   };
 
   return (
     <>
-    <div style={{ padding: '20px' }}>
-      <Card title="Add a Social Platform">
-        <Row gutter={[16, 16]}>
-          <Col span={8} onClick={() => handleConnect('YouTube')}>
-            <Card hoverable style={{ textAlign: 'center' }}>
-              <YoutubeOutlined style={{ fontSize: '32px', color: '#FF0000' }} />
-              <p>YouTube</p>
-            </Card>
-          </Col>
-          {/* Features to be release in future versions
+      <div style={{ padding: '20px' }}>
+        <Card title="Add a Social Platform">
+          <Row gutter={[16, 16]}>
+            <Col span={8} onClick={() => handleConnect('YouTube')}>
+              <Card hoverable style={{ textAlign: 'center' }}>
+                <YoutubeOutlined style={{ fontSize: '32px', color: '#FF0000' }} />
+                <p>YouTube</p>
+              </Card>
+            </Col>
+            {/* Features to be release in future versions
           <Col span={8} onClick={() => handleConnect('Instagram')}>
             <Card hoverable style={{ textAlign: 'center' }}>
               <InstagramOutlined style={{ fontSize: '32px', color: '#8a3ab9' }} />
@@ -32,9 +32,9 @@ function AddSocialPlatform() {
               <p>Facebook</p>
             </Card>
           </Col> */}
-        </Row>
-      </Card>
-    </div>
+          </Row>
+        </Card>
+      </div>
     </>
   );
 }

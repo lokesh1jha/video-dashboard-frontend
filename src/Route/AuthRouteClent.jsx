@@ -11,9 +11,7 @@ import {
 } from '@ant-design/icons';
 import Profile from '../pages/Profile';
 import History from '../pages/History';
-import YoutubeAuthLogin from '../components/YoutubeAuthLogin';
 import Home from '../pages/Home';
-import { logout } from '../api';
 
 const { Sider } = Layout;
 
@@ -42,9 +40,10 @@ function AuthRouteClent() {
     const isHomeRoute = location.pathname === '/home';
 
     const handleLogout = async () => {
-        await logout()
-        console.log("logout")
-    }
+        localStorage.removeItem('Authorization');
+        window.location.reload();
+      }
+      
     return (
         <Layout style={{ minHeight: '100vh' }}>
             {!isHomeRoute && (
@@ -87,7 +86,6 @@ function AuthRouteClent() {
                     <Route path="/dashboard" element={<Dashboard />} />
                     <Route path="/history" element={<History />} />
                     <Route path="/profile" element={<Profile />} />
-                    <Route path="/youtubeauthwizard" element={<YoutubeAuthLogin />} />
                     <Route path="/home" element={<Home />} />
                 </Routes>
             </Layout>

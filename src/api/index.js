@@ -7,10 +7,10 @@ export const login = async (credentials) => {
   try {
     var response = await axios.post(URLConstants.login, credentials);
     let message = response.data.status == 200 ? "Login successfully" : "Please check your credentials again"
-    return {status: response.data.status, token : response.data.token, message, is_youtube_authenticated: response.data.is_youtube_authenticated};
+    return { status: response.data.status, token: response.data.token, message, is_youtube_authenticated: response.data.is_youtube_authenticated };
   } catch (error) {
     console.log(error)
-    return {status: 500, message: "Internal Server error"};
+    return { status: 500, message: "Internal Server error" };
   }
 };
 
@@ -19,9 +19,9 @@ export const register = async (credentials) => {
     console.log(credentials)
     const response = await axios.post(URLConstants.register, credentials);
     console.log(response.data);
-    return {status: response.data.status, message: response.data.message};
+    return { status: response.data.status, message: response.data.message };
   } catch (error) {
-    return {status: 500, message: "Internal Server error"};
+    return { status: 500, message: "Internal Server error" };
   }
 };
 
@@ -37,10 +37,19 @@ export const logout = async () => {
   }
 };
 
-export const getDecodedJWT = async (token) => {
+export const getDecodedJWT = (token) => {
   try {
     return jwtDecode(token)
   } catch (error) {
-    
+    console.log(error);
+
+  }
+}
+
+export const setJwtToken = (token) => {
+  try {
+    localStorage.setItem('Authorization', token);
+  } catch (error) {
+    console.log(error);
   }
 }

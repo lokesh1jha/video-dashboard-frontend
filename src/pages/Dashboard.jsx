@@ -5,24 +5,27 @@ import showNotification from '../components/showNotification';
 import axios from 'axios';
 import DashboardStats from '../components/DashboardStats';
 import { useAuth } from '../AuthProvider';
+import { setJwtToken } from '../api';
+import { URLConstants } from '../api/urlConstants';
 
 const { Content } = Layout;
 
 const Dashboard = () => {
-  const {user} = useAuth()
+  const { user, setUser } = useAuth()
   const { token } = theme.useToken() || {};
   const { colorBgContainer, borderRadiusLG } = token || {};
   const youtubeLogined = user.is_youtube_authenticated == 1;
 
-  
+
   useEffect(() => {
     const urlParams = new URLSearchParams(window.location.search);
     const code = urlParams.get('code');
+    console.log("111111", code)
 
     if (code) {
       showNotification('success', 'Auth Success', 'YouTube Authentication Successful');
 
-      axios.post('http://localhost:5000/saveyoutubedetails',
+      axios.post(URLConstants.saveYoutubeDetails,
         { code },
         {
           headers: {
@@ -30,16 +33,20 @@ const Dashboard = () => {
           }
         }
       )
-        .tAddSocialPlatformhen(response => {
-          console.log(response);
+        .then(response => {
+          let newUser = { ...user };
+          newUser.is_youtube_authenticated = 1
+          setUser(newUser)
+          // setJwtToken(response.token)
+        })
+        .then(res => {
+          //clear url extra part leave till dashboard
+          window.history.replaceState({}, document.title, window.location.pathname);
+          window.location.href = '/dashboard';
         })
         .catch(error => {
           console.error('Error:', error);
         });
-
-      //clear url extra part leave till dashboard
-      // window.history.replaceState({}, document.title, window.location.pathname);
-      // window.location.href = '/dashboard';
     }
   }, []);
 
@@ -56,7 +63,7 @@ const Dashboard = () => {
       >
         {youtubeLogined ?
           <DashboardStats />
-        : <AddSocialPlatform />}
+          : <AddSocialPlatform />}
       </Content>
     </Layout>
   );

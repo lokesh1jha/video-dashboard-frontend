@@ -13,7 +13,16 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem('Authorization');
-    if (token) {
+    if (!token) {
+      let nonAuthPages = ['/login', '/signup', '/home']
+
+      if (nonAuthPages.indexOf(window.location.pathname) == -1) {
+        navigate('/login');
+      }
+      return;
+    }
+    else {
+      console.log("here toooooo")
       try {
         const decodedToken = getDecodedJWT(token);
         const expirationTime = decodedToken.exp * 1000; // Convert to milliseconds
@@ -24,9 +33,11 @@ function App() {
           setIsLoggedIn(false);
           navigate('/login');
         } else {
+          console.log(user, "dfdsfdsf", decodedToken)
           let newUserContent = user
           newUserContent.is_youtube_authenticated = decodedToken.is_youtube_authenticated;
           newUserContent.user_type = decodedToken.user_type;
+          console.log("newUserContent", newUserContent)
           setUser(newUserContent);
           setIsLoggedIn(true);
         }
@@ -36,14 +47,10 @@ function App() {
         setIsLoggedIn(false);
         navigate('/login');
       }
-    } else {
-      if (isLoggedIn) {
-        setIsLoggedIn(false);
-        navigate('/login');
-      }
     }
   }, [navigate, setIsLoggedIn, user]);
 
+  // console.log("user_type", user.user_type)
 
   return (
     <>

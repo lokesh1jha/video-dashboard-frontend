@@ -25,8 +25,8 @@ const Signup = () => {
     
     return (
         <>
-        <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50 }}>
-            <Title level={2}>Sign Up</Title>
+        <div style={{ maxWidth: 300, margin: 'auto', marginTop: 50, padding: 20, border: '1px solid #ccc', borderRadius: 5, boxShadow: '0 0 10px rgba(0, 0, 0, 0.1)', }}>
+        <Title level={2}>Sign Up</Title>
             <Form
                 name="signupForm"
                 initialValues={{ remember: true }}

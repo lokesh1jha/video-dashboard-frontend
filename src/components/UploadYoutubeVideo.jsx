@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Form, Input, Upload, Button, Select, Tag } from 'antd';
 import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
+import { URLConstants } from '../api/urlConstants';
 
 const { Option } = Select;
 
@@ -49,18 +50,19 @@ function UploadYoutubeVideo() {
     startUpload(values);
   };
 
+
   const startUpload = (formData) => {
     console.log('Form data:', formData);
     console.log('Video file:', videoFile);
     console.log('Thumbnail file:', thumbnailFile);
-    // Example API call:
-    // fetch('your-upload-api-endpoint', {
-    //   method: 'POST',
-    //   body: formData,
-    // })
-    // .then(response => response.json())
-    // .then(data => console.log('Upload response:', data))
-    // .catch(error => console.error('Upload error:', error));
+
+    axios.post(URLConstants.uploadTocloud, formData)
+      .then(response => {
+        console.log('Upload response:', response.data);
+      })
+      .catch(error => {
+        console.error('Upload error:', error);
+      });
   };
 
   return (
@@ -160,7 +162,7 @@ function UploadYoutubeVideo() {
             Upload
           </Button>
         </Form.Item>
-        
+
       </Form>
     </div>
   );

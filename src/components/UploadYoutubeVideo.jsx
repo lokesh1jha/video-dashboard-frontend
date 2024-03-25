@@ -1,14 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Form, Input, Upload, Button, Select, Tag } from 'antd';
-import { UploadOutlined, PlusOutlined } from '@ant-design/icons';
+import { Form, Input, Button, Select, Tag } from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { URLConstants } from '../api/urlConstants';
+import SingleFileUploader from './SingleFileUploader';
+import MultipleFileUploader from './MultipleFileUploader';
 
 const { Option } = Select;
 
 function UploadYoutubeVideo() {
   const [form] = Form.useForm();
-  const [videoFile, setVideoFile] = useState(null);
-  const [thumbnailFile, setThumbnailFile] = useState(null);
   const [tags, setTags] = useState([]);
   const [inputVisible, setInputVisible] = useState(false);
   const [inputValue, setInputValue] = useState('');
@@ -20,13 +20,6 @@ function UploadYoutubeVideo() {
     }
   }, [inputVisible]);
 
-  const handleVideoUpload = (file) => {
-    setVideoFile(file);
-  };
-
-  const handleThumbnailUpload = (file) => {
-    setThumbnailFile(file);
-  };
 
   const handleClose = (removedTag) => {
     const newTags = tags.filter((tag) => tag !== removedTag);
@@ -53,8 +46,6 @@ function UploadYoutubeVideo() {
 
   const startUpload = (formData) => {
     console.log('Form data:', formData);
-    console.log('Video file:', videoFile);
-    console.log('Thumbnail file:', thumbnailFile);
 
     axios.post(URLConstants.uploadTocloud, formData)
       .then(response => {
@@ -67,7 +58,17 @@ function UploadYoutubeVideo() {
 
   return (
     <div style={{ margin: '20px' }}>
-      <h2>Upload YouTube Video</h2>
+      <h2>Upload Edited Video</h2>
+      <br />
+
+      <h3>Upload Video</h3>
+      <SingleFileUploader />
+      <br />
+
+      <h3>Upload Thumbnails</h3>
+      <MultipleFileUploader />
+      <br />
+
       <Form
         form={form}
         layout="vertical"
@@ -92,28 +93,7 @@ function UploadYoutubeVideo() {
         >
           <Input.TextArea rows={4} />
         </Form.Item>
-        <Form.Item
-          name="videoFile"
-          label="Upload Video"
-          valuePropName="fileList"
-          getValueFromEvent={handleVideoUpload}
-          rules={[{ required: true, message: 'Please upload a video' }]}
-        >
-          <Upload maxCount={1} accept="video/*">
-            <Button icon={<UploadOutlined />}>Select Video File</Button>
-          </Upload>
-        </Form.Item>
-        <Form.Item
-          name="thumbnailFile"
-          label="Upload Thumbnail"
-          valuePropName="fileList"
-          getValueFromEvent={handleThumbnailUpload}
-          rules={[{ required: true, message: 'Please upload a thumbnail' }]}
-        >
-          <Upload maxCount={1} accept="image/*">
-            <Button icon={<UploadOutlined />}>Select Thumbnail File</Button>
-          </Upload>
-        </Form.Item>
+
         <Form.Item name="language" label="Language">
           <Select>
             <Option value="en">English</Option>
